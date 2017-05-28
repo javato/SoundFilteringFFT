@@ -21,15 +21,13 @@ import org.jfree.ui.RefineryUtilities;
  */
 
 public class uinterface extends javax.swing.JFrame {
-    public static ArrayList<Float> lags = new ArrayList<Float>();
-    public static ArrayList<Float> lagsNorm = new ArrayList<Float>();
     public static FastFourierTransform fft = new FastFourierTransform();
     public static FastFourierTransform ifft = new FastFourierTransform();
-    
     public static ArrayList<Complex> fftResul;
     public static ArrayList<Complex> filtered;
     public static ArrayList<Double> ifftResul;
     public static ArrayList<Double> original;
+    public static ArrayList<Double> input;
     
 
     public uinterface() {
@@ -59,6 +57,8 @@ public class uinterface extends javax.swing.JFrame {
         originalField = new javax.swing.JTextField();
         errorButton = new javax.swing.JButton();
         loadErrorButton = new javax.swing.JButton();
+        originalGraphButton = new javax.swing.JButton();
+        filteredSoundGraphButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +171,20 @@ public class uinterface extends javax.swing.JFrame {
             }
         });
 
+        originalGraphButton.setText("Loaded Signal Graph");
+        originalGraphButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                originalGraphButtonActionPerformed(evt);
+            }
+        });
+
+        filteredSoundGraphButton.setText("Filtered Sound Graph");
+        filteredSoundGraphButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filteredSoundGraphButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,18 +218,19 @@ public class uinterface extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(SpectrumButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filteredSpectrumButton)))
+                            .addComponent(filteredSpectrumButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filteredSoundGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LoadButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(signalsLoadedGraphButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(loadErrorButton)
-                                .addGap(2, 2, 2)
-                                .addComponent(errorButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(LoadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(signalsLoadedGraphButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loadErrorButton)
+                        .addGap(2, 2, 2)
+                        .addComponent(errorButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(originalGraphButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -232,26 +247,28 @@ public class uinterface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFrom)
-                    .addComponent(fieldFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SpectrumButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTo)
                     .addComponent(fieldTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fftToFileButton)
-                    .addComponent(SpectrumButton))
+                    .addComponent(filteredSpectrumButton))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fftButton)
                     .addComponent(filterButton)
                     .addComponent(ifftButton)
                     .addComponent(ifftToFileButton)
-                    .addComponent(filteredSpectrumButton))
+                    .addComponent(filteredSoundGraphButton))
                 .addGap(18, 18, 18)
                 .addComponent(originalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(errorButton)
-                    .addComponent(loadErrorButton))
+                    .addComponent(loadErrorButton)
+                    .addComponent(originalGraphButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -260,10 +277,11 @@ public class uinterface extends javax.swing.JFrame {
 
     //Plots the input
     private void signalsLoadedGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signalsLoadedGraphButtonActionPerformed
-        final Graphs graphSignal1 = new Graphs("Input", stringToDoubleArrayList(this.fieldX.getText()), "Time", "Y", "Original Signal");
+        final Graphs graphSignal1 = new Graphs("Input Sound", stringToDoubleArrayList(this.fieldX.getText()), "Time", "Fj", "Input Sound");
         graphSignal1.pack();
         RefineryUtilities.centerFrameOnScreen(graphSignal1);
         graphSignal1.setVisible(true);
+        
     }//GEN-LAST:event_signalsLoadedGraphButtonActionPerformed
 
     //Compute FFT
@@ -277,7 +295,7 @@ public class uinterface extends javax.swing.JFrame {
             System.out.println(fftResul.get(i).re + " , " + fftResul.get(i).im);
         }*/
         
-        this.resultsText.setText("Inverse FFT has been computed!");
+        this.resultsText.setText("FFT has been computed!");
     }//GEN-LAST:event_fftButtonActionPerformed
 
     //Compute IFFT
@@ -299,7 +317,7 @@ public class uinterface extends javax.swing.JFrame {
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         if(this.fieldX.getText().isEmpty()) this.resultsText.setText("You must to specify the signal before!!");
         else{
-            ArrayList<Double> input = new ArrayList<Double>(stringToDoubleArrayList(this.fieldX.getText()));
+            input = new ArrayList<Double>(stringToDoubleArrayList(this.fieldX.getText()));
             //System.out.println("Size before padding: " + input.size());
             ArrayList<Complex> cinput = new ArrayList<Complex>();
             
@@ -345,7 +363,7 @@ public class uinterface extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldXActionPerformed
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-        filtered = new ArrayList<Complex>(fftResul);
+        //filtered = new ArrayList<Complex>(fftResul);
         int from, to;
         from = Integer.parseInt(this.fieldFrom.getText().toString());
         to = Integer.parseInt(this.fieldTo.getText().toString());
@@ -449,6 +467,7 @@ public class uinterface extends javax.swing.JFrame {
                 continue;
             }
             error.add(((Math.abs(ifftResul.get(i) - original.get(i))) / Math.abs(original.get(i))));
+            //error.add(((Math.abs(ifftResul.get(i) - original.get(i))) / Math.abs(input.get(i))));
         }
         System.out.println("--- Relative Error ---");
         System.out.println(error.toString());
@@ -459,6 +478,20 @@ public class uinterface extends javax.swing.JFrame {
         mean = mean / (double)error.size();
         this.resultsText.setText("Relative Error = " + mean);
     }//GEN-LAST:event_errorButtonActionPerformed
+
+    private void originalGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originalGraphButtonActionPerformed
+        final Graphs graphSignal1 = new Graphs("Sound to Compare", stringToDoubleArrayList(this.originalField.getText()), "Time", "Fj", "Sound to Compare");
+        graphSignal1.pack();
+        RefineryUtilities.centerFrameOnScreen(graphSignal1);
+        graphSignal1.setVisible(true);
+    }//GEN-LAST:event_originalGraphButtonActionPerformed
+
+    private void filteredSoundGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filteredSoundGraphButtonActionPerformed
+        final Graphs graphSignal1 = new Graphs("Filtered Sound", ifftResul, "Time", "Fj", "Filtered Sound");
+        graphSignal1.pack();
+        RefineryUtilities.centerFrameOnScreen(graphSignal1);
+        graphSignal1.setVisible(true);
+    }//GEN-LAST:event_filteredSoundGraphButtonActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -509,6 +542,7 @@ public class uinterface extends javax.swing.JFrame {
     private javax.swing.JTextField fieldTo;
     private javax.swing.JTextField fieldX;
     private javax.swing.JButton filterButton;
+    private javax.swing.JButton filteredSoundGraphButton;
     private javax.swing.JButton filteredSpectrumButton;
     private javax.swing.JButton ifftButton;
     private javax.swing.JButton ifftToFileButton;
@@ -517,6 +551,7 @@ public class uinterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loadErrorButton;
     private javax.swing.JTextField originalField;
+    private javax.swing.JButton originalGraphButton;
     private javax.swing.JTextArea resultsText;
     private javax.swing.JButton signalsLoadedGraphButton;
     // End of variables declaration//GEN-END:variables

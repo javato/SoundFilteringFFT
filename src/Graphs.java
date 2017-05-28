@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
@@ -24,13 +25,15 @@ import org.jfree.ui.ApplicationFrame;
  */
 
 public class Graphs extends JFrame{
-    public Graphs(final String title, ArrayList<Double> lags, String x, String y, String name) {
+    public Graphs(final String title, ArrayList<Double> input, String x, String y, String name) {
 
+    
     super(title);
+    
     this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     final XYSeries series = new XYSeries(name);
-    for (int i = 0; i < lags.size(); i++) {
-        series.add(i, lags.get(i));
+    for (int i = 0; i < input.size(); i++) {
+        series.add(i, input.get(i));
     }
         
     final XYSeriesCollection data = new XYSeriesCollection(series);
@@ -45,6 +48,7 @@ public class Graphs extends JFrame{
         true,
         false
     );
+    
 
     XYPlot plot = chart.getXYPlot();
     //chart.setDefaul
@@ -54,6 +58,7 @@ public class Graphs extends JFrame{
     final ChartPanel chartPanel = new ChartPanel(chart);
     chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
     setContentPane(chartPanel);
+    
     }
 
 }

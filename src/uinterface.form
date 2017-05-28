@@ -57,23 +57,22 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="SpectrumButton" max="32767" attributes="0"/>
-                          <Component id="filteredSpectrumButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="filteredSpectrumButton" max="32767" attributes="0"/>
+                          <Component id="filteredSoundGraphButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="LoadButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="signalsLoadedGraphButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="loadErrorButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="errorButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="LoadButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="signalsLoadedGraphButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="loadErrorButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="errorButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="originalGraphButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -96,13 +95,14 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelFrom" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldFrom" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpectrumButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelTo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldTo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fftToFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="SpectrumButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filteredSpectrumButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -110,7 +110,7 @@
                   <Component id="filterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ifftButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ifftToFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filteredSpectrumButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filteredSoundGraphButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="originalField" min="-2" max="-2" attributes="0"/>
@@ -118,6 +118,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="errorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="loadErrorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="originalGraphButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -256,6 +257,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadErrorButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="originalGraphButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Loaded Signal Graph"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="originalGraphButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="filteredSoundGraphButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Filtered Sound Graph"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filteredSoundGraphButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
