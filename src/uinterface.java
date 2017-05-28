@@ -48,6 +48,7 @@ public class uinterface extends javax.swing.JFrame {
         loadErrorButton = new javax.swing.JButton();
         originalGraphButton = new javax.swing.JButton();
         filteredSoundGraphButton = new javax.swing.JButton();
+        filterHzButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +175,13 @@ public class uinterface extends javax.swing.JFrame {
             }
         });
 
+        filterHzButton.setText("Apply by Hz");
+        filterHzButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterHzButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,31 +192,6 @@ public class uinterface extends javax.swing.JFrame {
                     .addComponent(originalField)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(fieldX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(fftButton)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelFrom)
-                                    .addComponent(jLabelTo))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fieldTo)
-                                    .addComponent(fieldFrom)))
-                            .addComponent(filterButton))
-                        .addGap(18, 18, 18)
-                        .addComponent(ifftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ifftToFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fftToFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SpectrumButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filteredSpectrumButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filteredSoundGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LoadButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,7 +202,34 @@ public class uinterface extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(errorButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(originalGraphButton)))
+                        .addComponent(originalGraphButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(fftButton)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filterHzButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelFrom)
+                                        .addComponent(jLabelTo))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(fieldTo)
+                                        .addComponent(fieldFrom)))
+                                .addComponent(filterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(ifftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ifftToFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fftToFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SpectrumButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filteredSpectrumButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filteredSoundGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -251,14 +261,16 @@ public class uinterface extends javax.swing.JFrame {
                     .addComponent(ifftButton)
                     .addComponent(ifftToFileButton)
                     .addComponent(filteredSoundGraphButton))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filterHzButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(originalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(errorButton)
                     .addComponent(loadErrorButton)
                     .addComponent(originalGraphButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -351,6 +363,7 @@ public class uinterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldXActionPerformed
 
+    // Apply filter from ui fields
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
         //filtered = new ArrayList<Complex>(fftResul);
         int from, to;
@@ -454,6 +467,7 @@ public class uinterface extends javax.swing.JFrame {
         for (int i = 0; i < original.size(); i++) {
             if(original.get(i) == 0.0){
                 continue;
+                //error.add(((Math.abs(ifftResul.get(i) - 0.00001)) / Math.abs(0.00001)));
             }
             error.add(((Math.abs(ifftResul.get(i) - original.get(i))) / Math.abs(original.get(i))));
             //error.add(((Math.abs(ifftResul.get(i) - original.get(i))) / Math.abs(input.get(i))));
@@ -481,6 +495,42 @@ public class uinterface extends javax.swing.JFrame {
         RefineryUtilities.centerFrameOnScreen(graphSignal1);
         graphSignal1.setVisible(true);
     }//GEN-LAST:event_filteredSoundGraphButtonActionPerformed
+
+    private void filterHzButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterHzButtonActionPerformed
+        //filtered = new ArrayList<Complex>(fftResul);
+        long from, to;
+        from = Integer.parseInt(this.fieldFrom.getText().toString());
+        to = Integer.parseInt(this.fieldTo.getText().toString());
+        long n = filtered.size();
+        long counter = 0;
+        
+        from = (from * n) / 44100;
+        to = (to * n) / 44100;
+       
+        //debug
+        /*System.out.println("From: " + this.fieldFrom.getText());
+        System.out.println("To: " + this.fieldTo.getText());
+        System.out.println("From: " + from);
+        System.out.println("To: " + to);*/
+
+        if(from > to){
+            System.out.println("'From' should be lower than 'To'");
+        }
+        else{
+            for (long i = from - 1; i < to; i++) {
+                filtered.set((int)i, new Complex(0.0, 0.0));
+                filtered.set((int)(n - from - counter), new Complex(0.0, 0.0));
+                counter++;
+            }
+            this.resultsText.setText("FFT data was filtered by Hz!");
+            
+            // Debug
+            /*System.out.println("---After Filtering Results:---");
+            for (int i = 0; i < filtered.size(); i++) {
+                System.out.println(" -> " + filtered.get(i).re + " , " + filtered.get(i).im);
+            }*/
+        }
+    }//GEN-LAST:event_filterHzButtonActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -531,6 +581,7 @@ public class uinterface extends javax.swing.JFrame {
     private javax.swing.JTextField fieldTo;
     private javax.swing.JTextField fieldX;
     private javax.swing.JButton filterButton;
+    private javax.swing.JButton filterHzButton;
     private javax.swing.JButton filteredSoundGraphButton;
     private javax.swing.JButton filteredSpectrumButton;
     private javax.swing.JButton ifftButton;
